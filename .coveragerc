@@ -1,0 +1,3 @@
+[run]
+include = mylittlejob/*
+omit = *migrations*, *tests*

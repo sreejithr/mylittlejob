@@ -1,0 +1,7 @@
+-r base.txt
+
+coverage==4.3.4
+Sphinx==1.5.5
+django-test-plus==1.0.17
+
+django-debug-toolbar==1.7

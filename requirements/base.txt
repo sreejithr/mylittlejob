@@ -1,0 +1,5 @@
+django==1.11
+django-environ==0.4.3
+
+# Time zones support
+pytz==2017.2

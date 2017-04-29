@@ -1,10 +1,50 @@
+{% load staticfiles %}
 {% block content %}
 <div class="col-xs-12 col-sm-8 col-sm-offset-2">
   <ul class="results">
 
-    {% ifequal type "artist" %}
+    {% if items %}
+      {% ifequal type "artist" %}
 
-      {% if items %}
+          {% for item in items %}
+              <li>
+
+                <div class="result artist-result">
+                  {% if item.thumbnail %}
+                    <div class="thumb-container">
+                      <img class="thumb" src="{{ item.thumbnail.url }}">
+                    </div>
+                  {% else %}
+                      <div class="thumb-container">
+                        <a href="{{ item.href }}">
+                          <img class="thumb" src="{% static 'spotify_search/img/default_cover.jpeg' %}" />
+                        </a>
+                      </div>
+
+                  {% endif %}
+
+                  <div class="details-container">
+                    <div class="name">
+                      <a href="{{ item.href }}">
+                        {{ item.name }}
+                      </a>
+                    </div>
+                    <div class="chiclets">
+                      {% for genre in item.genres %}
+                        <span class="chiclet">{{ genre }}</span>
+                      {% endfor %}
+                    </div>
+                    <div class="followers">{{ item.followers.total }} followers</div>
+                  </div>
+
+                </div>
+              </li>
+          {% endfor %}
+
+      {% endifequal %}
+
+      {% ifequal type "album" %}
+
         {% for item in items %}
           <li>
             <div class="result artist-result">
@@ -13,17 +53,23 @@
                 <img class="thumb" src="{{ item.thumbnail.url }}">
               </div>
             {% endif %}
-            <div>{{ item.name }}</div>
+
+            <div class="details-container">
+              <div class="name">{{ item.name }}</div>
+              <div class="chiclets">
+                {% for artist in item.artists %}
+                  <span class="chiclet">{{ artist.name }}</span>
+                {% endfor %}
+              </div>
+            </div>
+
           </li>
         {% endfor %}
-      {% else %}
-      {% endif %}
 
-    {% endifequal %}
+      {% endifequal %}
 
-    {% ifequal type "album" %}
+      {% ifequal type "playlist" %}
 
-      {% if items %}
         {% for item in items %}
           <li>
             <div class="result artist-result">
@@ -32,17 +78,18 @@
                 <img class="thumb" src="{{ item.thumbnail.url }}">
               </div>
             {% endif %}
-            <div>{{ item.name }}</div>
+            <div class="details-container">
+              <div class="name">{{ item.name }}</div>
+              <div class="track-count">{{ item.tracks.total }} tracks</div>
+            </div>
+
           </li>
         {% endfor %}
-      {% else %}
-      {% endif %}
 
-    {% endifequal %}
+      {% endifequal %}
 
-    {% ifequal type "playlist" %}
+      {% ifequal type "track" %}
 
-      {% if items %}
         {% for item in items %}
           <li>
             <div class="result artist-result">
@@ -51,32 +98,25 @@
                 <img class="thumb" src="{{ item.thumbnail.url }}">
               </div>
             {% endif %}
-            <div>{{ item.name }}</div>
-          </li>
-        {% endfor %}
-      {% else %}
-      {% endif %}
-
-    {% endifequal %}
-
-    {% ifequal type "track" %}
-
-      {% if items %}
-        {% for item in items %}
-          <li>
-            <div class="result artist-result">
-            {% if item.thumbnail %}
-              <div class="thumb-container">
-                <img class="thumb" src="{{ item.thumbnail.url }}">
+            <div class="details-container">
+              <div class="name">{{ item.name }}</div>
+              <div class="album">{{ item.album.name }}</div>
+              <div class="chiclets">
+                {% for artist in item.artists %}
+                  <span class="chiclet">{{ artist.name }}</span>
+                {% endfor %}
               </div>
-            {% endif %}
-            <div>{{ item.name }}</div>
+
+            </div>
           </li>
         {% endfor %}
-      {% else %}
-      {% endif %}
 
-    {% endifequal %}
+      {% endifequal %}
+    {% else %}
+     <div id="no-result">
+       <h3>Spotify Search</h3>
+     </div>
+    {% endif %}
 
   </ul>
 </div>

@@ -38,6 +38,38 @@ class SpotifySearchAPI(BaseSpotifySearchAPI):
         w = keyword.replace('"', '')
         return w.replace(' ', '+')
 
+    def _add_thumbnails(self, results):
+        def _add_thumbnail(result):
+            """
+            Adds a `thumbnail` key. Since the image dimensions in the
+            result aren't uniform, we select one which is atleast 150 x 150
+            and closest in dimensions to it.
+            """
+            try:
+                thumbnail = result['images'][0]
+            except IndexError:
+                # No images in the result. We let the frontend code handle this.
+                result['thumbnail'] = None
+                return result
+
+            for image in result['images']:
+                if image['width'] < 150 or image['height'] < 150:
+                    continue
+
+                if image['width'] - 150 + image['height'] - 150 <\
+                   thumbnail['width'] - 150 + thumbnail['height'] - 150:
+                    thumbnail = image
+
+            result['thumbnail'] = thumbnail
+            return result
+
+        if results:
+            results['items'] = map(
+                lambda result: _add_thumbnail(result),
+                results.get('items', []),
+            )
+            return results
+
     def search(self, keyword):
         if keyword:
             self.keyword = self._clean_keyword(keyword)
@@ -71,12 +103,12 @@ class SpotifySearchAPI(BaseSpotifySearchAPI):
 
         if r.status_code == 200:
             if self.filters.get('type', None) == 'artist':
-                return r.json().get('artists', None)
+                return self._add_thumbnails(r.json().get('artists', None))
             elif self.filters.get('type', None) == 'album':
-                return r.json().get('album', None)
+                return self._add_thumbnails(r.json().get('album', None))
             elif self.filters.get('type', None) == 'playlist':
-                return r.json().get('playlists', None)
+                return self._add_thumbnails(r.json().get('playlist', None))
             elif self.filters.get('type', None) == 'track':
-                return r.json().get('track', None)
+                return self._add_thumbnails(r.json().get('track', None))
 
         return []

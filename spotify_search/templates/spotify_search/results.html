@@ -1,0 +1,83 @@
+{% block content %}
+<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+  <ul class="results">
+
+    {% ifequal type "artist" %}
+
+      {% if items %}
+        {% for item in items %}
+          <li>
+            <div class="result artist-result">
+            {% if item.thumbnail %}
+              <div class="thumb-container">
+                <img class="thumb" src="{{ item.thumbnail.url }}">
+              </div>
+            {% endif %}
+            <div>{{ item.name }}</div>
+          </li>
+        {% endfor %}
+      {% else %}
+      {% endif %}
+
+    {% endifequal %}
+
+    {% ifequal type "album" %}
+
+      {% if items %}
+        {% for item in items %}
+          <li>
+            <div class="result artist-result">
+            {% if item.thumbnail %}
+              <div class="thumb-container">
+                <img class="thumb" src="{{ item.thumbnail.url }}">
+              </div>
+            {% endif %}
+            <div>{{ item.name }}</div>
+          </li>
+        {% endfor %}
+      {% else %}
+      {% endif %}
+
+    {% endifequal %}
+
+    {% ifequal type "playlist" %}
+
+      {% if items %}
+        {% for item in items %}
+          <li>
+            <div class="result artist-result">
+            {% if item.thumbnail %}
+              <div class="thumb-container">
+                <img class="thumb" src="{{ item.thumbnail.url }}">
+              </div>
+            {% endif %}
+            <div>{{ item.name }}</div>
+          </li>
+        {% endfor %}
+      {% else %}
+      {% endif %}
+
+    {% endifequal %}
+
+    {% ifequal type "track" %}
+
+      {% if items %}
+        {% for item in items %}
+          <li>
+            <div class="result artist-result">
+            {% if item.thumbnail %}
+              <div class="thumb-container">
+                <img class="thumb" src="{{ item.thumbnail.url }}">
+              </div>
+            {% endif %}
+            <div>{{ item.name }}</div>
+          </li>
+        {% endfor %}
+      {% else %}
+      {% endif %}
+
+    {% endifequal %}
+
+  </ul>
+</div>
+{% endblock %}

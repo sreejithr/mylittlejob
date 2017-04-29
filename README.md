@@ -10,7 +10,6 @@ Get search results from Spotify Search API. Results can be filtered by artist, p
 * `django-environ` to manage enviroment variables.
 * Search URLs can be copied.
 * Filtering by 4 categories (artist, playlist, track, album).
-*
 
 Settings files are at `config/settings/`. 
 

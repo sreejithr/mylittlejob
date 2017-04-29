@@ -47,6 +47,7 @@ Then,
 
 ```
 export DJANGO_DEBUG=False
+python manage.py collectstatic
 gunicorn config.wsgi
 ```
 `localhost` is present in the `ALLOWED_HOSTS` setting. This was done for convenience.

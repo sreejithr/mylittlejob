@@ -24,7 +24,7 @@ CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
 
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['mylittlejob.eu'])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
 
 INSTALLED_APPS += ['gunicorn']
 

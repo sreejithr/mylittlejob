@@ -10,7 +10,7 @@ from .core import SpotifySearchAPI
 
 
 def home(request):
-    return render(request, 'spotify_search/index.html', context={})
+    return render(request, 'spotify_search/index.html', context={'type': 'artist'})
 
 
 def search(request, *args, **kwargs):
@@ -56,23 +56,23 @@ def search(request, *args, **kwargs):
 
             if not result:
                 return render(request, "spotify_search/index.html", context={
-                    'items': [],
+                    'items': None,
                     'type': filter_by,
-                    'count': 0,
+                    'count': None,
                     'q': keyword,
                 })
 
             context = {
-                'items': result.get('items', []),
+                'items': result.get('items', None),
                 'type': filter_by,
-                'count': result.get('total', 0),
+                'count': result.get('total', None),
                 'q': keyword,
             }
         else:
             context = {
-                'items': [],
+                'items': None,
                 'type': filter_by,
-                'count': 0,
+                'count': None,
                 'error_msg': 'Please supply the search term',
             }
 

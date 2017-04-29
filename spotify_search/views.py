@@ -16,6 +16,8 @@ def home(request):
 def search(request, *args, **kwargs):
     spotify = SpotifySearchAPI()
 
+    # POST requests come from AJAX calls. We return a JSON response with the
+    # actual contents of search results (rendered from results.html template)
     if (request.method == 'POST'):
         keyword = request.POST.get('q', None)
         filter_by = request.POST.get('filter_by', 'artist')

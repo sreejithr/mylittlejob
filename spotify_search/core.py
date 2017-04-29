@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-
 import requests
-
-from abc import ABCMeta, abstractmethod
 
 
 class MissingKeywordError(Exception):
@@ -13,23 +10,7 @@ class MissingFilterByError(Exception):
     pass
 
 
-class BaseSpotifySearchAPI:
-    __metaclass__ = ABCMeta
-
-    @abstractmethod
-    def search(self, keyword):
-        pass
-    
-    @abstractmethod
-    def filter_by(self, f):
-        pass
-
-    @abstractmethod
-    def execute(self):
-        pass
-
-
-class SpotifySearchAPI(BaseSpotifySearchAPI):
+class SpotifySearchAPI:
     url = "https://api.spotify.com/v1/search"
     keyword = None
     filters = {}

@@ -12,9 +12,9 @@ Get search results from Spotify Search API. Results can be filtered by artist, p
 * Filtering by 4 categories (artist, playlist, track, album).
 *
 
-Settings files are at `config/settings/`. 
+Settings files are at `config/settings/`.
 
-## Installation
+## Installing Dependencies
 
 ### Dev
 

@@ -1,14 +1,18 @@
 MyLittleJob Spotify Search
 ==========================
 
-Uses the Spotify Search API to get search results for terms. Results can be filtered by artist, playlist, album or track.
+Get search results from Spotify Search API. Results can be filtered by artist, playlist, album or track. Written in Django.
 
 ## Features
 
-* Copy-able urls for searches.
-* Filtering by 4 categories (artist, playlist, track, album).
 * Unit tests.
 * 88% test coverage.
+* `django-environ` to manage enviroment variables.
+* Search URLs can be copied.
+* Filtering by 4 categories (artist, playlist, track, album).
+*
+
+Settings files are at `config/settings/`. 
 
 ## Installation
 
@@ -35,6 +39,12 @@ python manage.py runserver
 Now, browse to [http://localhost:8000/](http://localhost:8000/)!
 
 ### Production
+
+The contents of the `.env` file for `django-environ` is inside `prod.env`. So, while doing production deployment, rename `prod.env` to `.env` like so:
+```
+mv config/settings/prod.env config/settings/.env
+```
+Then,
 
 ```
 export DJANGO_DEBUG=False
